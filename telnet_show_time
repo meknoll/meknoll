@@ -1,0 +1,31 @@
+*** Settings ***
+Library    Telnet
+
+*** Variables ***
+${HOST}    <your_device_ip>
+${PORT}    23
+${USER}    <your_username>
+${PASSWORD}    <your_password>
+${PROMPT}    $    # Adjust this based on your device's prompt
+
+*** Test Cases ***
+Connect to Device and Show Time
+    [Documentation]    Connect to the device using Telnet and send `show time` command
+    Open Connection    ${HOST}    ${PORT}
+    Login To Device    ${USER}    ${PASSWORD}
+    Execute Command    show time
+    Close Connection
+
+*** Keywords ***
+Login To Device
+    [Arguments]    ${user}    ${password}
+    Read Until Prompt    login:
+    Write            ${user}
+    Read Until Prompt    Password:
+    Write            ${password}
+    Read Until Prompt    ${PROMPT}
+
+Execute Command
+    [Arguments]    ${command}
+    Write            ${command}
+    Read Until Prompt    ${PROMPT}
