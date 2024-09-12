@@ -12,4 +12,3 @@ Try Telnet
 	Login     username      password
 	Write     commands
 	${out} =  Read Until Prompt
-has context menu
