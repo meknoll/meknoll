@@ -4,11 +4,11 @@ Library     Telnet    prompt=$
 
 *** Test Cases ***
 Try Telnet
-      Open Connection     10.177.77.77     port=23
+      Open Connection     10.224.131.198     port=23
    Set Prompt        (> |# )    
    Set Newline       \\n
       Set Newline       CRLF
 	
-	Login     username      password
+	Login     e7      admin
 	Write     commands
 	${out} =  Read Until Prompt
