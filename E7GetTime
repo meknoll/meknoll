@@ -1,0 +1,32 @@
+*** Settings ***
+Library    Telnet
+
+*** Variables ***
+${HOST}    10.224.131.198
+${PORT}    23
+${USER}    e7
+${PASSWORD}    admin
+${PROMPT}  LWVLLABCE72P01
+
+*** Test Cases ***
+Connect to Device and Show Time
+    [Documentation]    Connect to the device using Telnet and send `show time` command
+    Set Prompt  ${PROMPT}  LWVLLABCE72P01
+    Open Connection    ${HOST}    ${PORT}
+    Login To Device    ${USER}    ${PASSWORD}
+    Execute Command    show time
+    Close Connection
+
+*** Keywords ***
+Login To Device
+    [Arguments]    ${USER}    ${password}
+    Read Until Prompt    Username:
+    Write            ${user}
+    Read Until Prompt    Password:
+    Write            ${password}
+    Read Until Prompt    ${PROMPT}
+
+Execute Command
+    [Arguments]    ${command}
+    Write            ${command}
+    Read Until Prompt    ${PROMPT}
