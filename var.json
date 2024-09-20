@@ -1,0 +1,15 @@
+{
+    "HOST": "10.224.131.198",
+    "user": "e7",
+    "password": "admin",
+    "eth_svc": "Video1",
+    "ONT_Port": "1/g1",
+    "bw_profile": "@1G_1G",
+    "ST_Act": "@Any_Priority_Tagged",
+    "outer_vlan": "1023",
+    "inner_vlan": "104",
+    "mcast_profile":"@FRONTIERTV",
+    "description": "LABLWVVNG01,lag-100,1023,104",
+    "pon_cos": "cos-1"
+  }
+  
