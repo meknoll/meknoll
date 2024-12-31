@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="tmf854.v1" xmlns:ns2="alu.v1">
+   <ns0:Header>
+      <ns1:header tmf854Version="1.1">
+         <ns1:activityName>query</ns1:activityName>
+         <ns1:msgName>query</ns1:msgName>
+         <ns1:msgType>REQUEST</ns1:msgType>
+         <ns1:senderURI>https://10.250.37.132:8443</ns1:senderURI>
+         <ns1:destinationURI>https:/10.250.37.132:8443/tmf854/services</ns1:destinationURI>
+         <ns1:correlationId>1</ns1:correlationId>
+         <ns1:communicationPattern>MultipleBatchResponse</ns1:communicationPattern>
+         <ns1:communicationStyle>RPC</ns1:communicationStyle>
+         <ns1:requestedBatchSize>200</ns1:requestedBatchSize>
+         <ns1:timestamp>20151124103328.840+0700</ns1:timestamp>
+      </ns1:header>
+   </ns0:Header>
+   <ns0:Body>
+      <ns2:query>
+         <ns2:baseObjectList>
+            <ns2:baseObject>
+               <ns1:mdNm>AMS</ns1:mdNm>
+               <ns1:meNm>LWVLLABN7360P05</ns1:meNm>
+               <ns1:propNm>/type=Ethernet Port/R1.S1.LT1.PON1.ONT11.C10.P1</ns1:propNm>
+            </ns2:baseObject>
+         </ns2:baseObjectList>
+         <ns2:level>BASE_OBJECT</ns2:level>
+         <ns2:source>NETWORK</ns2:source>
+      </ns2:query>
+   </ns0:Body>
+</ns0:Envelope>

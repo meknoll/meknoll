@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="tmf854.v1" xmlns:ns2="alu.v1">
+   <ns0:Header>
+      <ns1:header extVersion="?" extAuthor="?" tmf854Version="?">
+         <ns1:activityName>executeAction</ns1:activityName>
+         <ns1:msgName>executeAction</ns1:msgName>
+         <ns1:msgType>REQUEST</ns1:msgType>
+         <ns1:senderURI>http://10.250.37.132:8080</ns1:senderURI>
+         <ns1:destinationURI>http://10.250.37.132:8080/ossams/services</ns1:destinationURI>
+         <ns1:communicationPattern>SimpleResponse</ns1:communicationPattern>
+         <ns1:communicationStyle>RPC</ns1:communicationStyle>
+      </ns1:header>
+   </ns0:Header>
+   <ns0:Body>
+      <ns2:executeAction>
+         <ns2:name>
+            <ns1:mdNm>AMS</ns1:mdNm>
+            <ns1:meNm>LWVLLABN7360P05</ns1:meNm>
+            <ns1:ehNm>/rack=1/shelf=1/slot=LT1</ns1:ehNm>
+         </ns2:name>
+         <ns2:action>RESET</ns2:action>
+          <ns2:arguments>
+            <ns2:package>
+               <ns2:NameAndStringValue>
+                  <ns1:name>resetMode</ns1:name>
+                  <ns1:value>with-selftest</ns1:value>
+               </ns2:NameAndStringValue>
+            </ns2:package>
+         </ns2:arguments>
+      </ns2:executeAction>
+   </ns0:Body>
+</ns0:Envelope>

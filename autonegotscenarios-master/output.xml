@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.9.2 on win32)" generated="20241231 08:14:18.914" rpa="false" schemaversion="3">
+<suite id="s1" name="AutoNegotResetLT" source="C:\Users\mkk933\AppData\Local\Programs\Python\Python39\autonegotscenarios-master\AutoNegotResetLT.robot">
+<test id="s1-t1" name="Auto Negotiate Reset OLT (with and without self-test)" line="34">
+<kw name="Get Time" library="BuiltIn">
+<var>${timestamp}</var>
+<arg>result_format=%Y-%m-%d hh:mm:ss</arg>
+<doc>Returns the given time in the requested format.</doc>
+<msg timestamp="20241231 08:14:19.254" level="INFO">${timestamp} = 2024-12-31 08:14:19</msg>
+<status status="PASS" starttime="20241231 08:14:19.254" endtime="20241231 08:14:19.254"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${timestamp}</var>
+<arg>${timestamp}</arg>
+<arg>:</arg>
+<arg>.</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20241231 08:14:19.256" level="INFO">${timestamp} = 2024-12-31 08.14.19</msg>
+<status status="PASS" starttime="20241231 08:14:19.256" endtime="20241231 08:14:19.256"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ONT_resetDataFile}</var>
+<arg>LT_reset_Data_${timestamp}.txt</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20241231 08:14:19.257" level="INFO">${ONT_resetDataFile} = LT_reset_Data_2024-12-31 08.14.19.txt</msg>
+<status status="PASS" starttime="20241231 08:14:19.256" endtime="20241231 08:14:19.257"/>
+</kw>
+<kw name="Create File" library="OperatingSystem">
+<arg>${ONT_resetDataFile}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<msg timestamp="20241231 08:14:19.259" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\mkk933\AppData\Local\Programs\Python\Python39\autonegotscenarios-master\LT_reset_Data_2024-12-31 08.14.19.txt"&gt;C:\Users\mkk933\AppData\Local\Programs\Python\Python39\autonegotscenarios-master\LT_reset_Data_2024-12-31 08.14.19.txt&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20241231 08:14:19.257" endtime="20241231 08:14:19.259"/>
+</kw>
+<for flavor="IN">
+<var>${resetLT_value}</var>
+<value>@{resetLT_value_list}</value>
+<iter>
+<var name="${resetLT_value}">with-selftest</var>
+<kw name="Query Xml Value" library="ONT_linkSpeed">
+<var>${result_query}</var>
+<arg>${queryFilePath}</arg>
+<arg>${query_ONT_meNm}</arg>
+<arg>${query_ONT_propNm}</arg>
+<msg timestamp="20241231 08:14:19.267" level="INFO">LWVLLABN7360P05
+/type=Ethernet Port/R1.S1.LT1.PON1.ONT11.C10.P1</msg>
+<msg timestamp="20241231 08:14:19.267" level="INFO">${result_query} = True</msg>
+<status status="PASS" starttime="20241231 08:14:19.261" endtime="20241231 08:14:19.267"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${result_query}</arg>
+<arg>Fail</arg>
+<arg>Modification failed: Value not found or did not match expected text</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20241231 08:14:19.267" endtime="20241231 08:14:19.268"/>
+</kw>
+<kw name="Change ResetLT Value" library="ONT_linkSpeed">
+<var>${result_action}</var>
+<arg>${resetLT_filePath}</arg>
+<arg>${resetLT_meNm}</arg>
+<arg>${resetLT_ehNm}</arg>
+<arg>${resetLT_value}</arg>
+<msg timestamp="20241231 08:14:19.272" level="INFO">&lt;Element '{http://schemas.xmlsoap.org/soap/envelope/}Envelope' at 0x000002B33D019630&gt;
+LWVLLABN7360P05
+/rack=1/shelf=1/slot=LT1
+with-selftest</msg>
+<msg timestamp="20241231 08:14:19.273" level="INFO">${result_action} = True</msg>
+<status status="PASS" starttime="20241231 08:14:19.268" endtime="20241231 08:14:19.273"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>not ${result_action}</arg>
+<arg>Fail</arg>
+<arg>failed: Not able to change action value</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20241231 08:14:19.273" endtime="20241231 08:14:19.274"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers_query}</var>
+<arg>Content-Type=text/xml;charset=UTF-8</arg>
+<arg>SOAPAction=""</arg>
+<arg>Host=10.250.37.132:8443</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20241231 08:14:19.275" level="INFO">&amp;{headers_query} = { Content-Type=text/xml;charset=UTF-8 | SOAPAction="" | Host=10.250.37.132:8443 }</msg>
+<status status="PASS" starttime="20241231 08:14:19.274" endtime="20241231 08:14:19.275"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>@{auth}</var>
+<arg>${soapUI_user}</arg>
+<arg>${passWord}</arg>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20241231 08:14:19.277" level="FAIL">Variable '${passWord}' not found.</msg>
+<status status="FAIL" starttime="20241231 08:14:19.275" endtime="20241231 08:14:19.277"/>
+</kw>
+<kw name="Get Binary File" library="OperatingSystem">
+<var>${queryEthPortBody}</var>
+<arg>C:\\Users\\mkk933\\AppData\\Local\\Programs\\Python\\Python39\\autonegotscenarios-master${/}queryEthPort.xml</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.277" endtime="20241231 08:14:19.277"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mySession</arg>
+<arg>${base_url_query}</arg>
+<arg>auth=${auth}</arg>
+<arg>disable_warnings=1</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.277" endtime="20241231 08:14:19.278"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response_queryEthPortBody}</var>
+<arg>mySession</arg>
+<arg>${endpoint_query}</arg>
+<arg>headers=${headers_query}</arg>
+<arg>data=${queryEthPortBody}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.278" endtime="20241231 08:14:19.278"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${xml_content}</var>
+<arg>${response_queryEthPortBody.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.278" endtime="20241231 08:14:19.278"/>
+</kw>
+<kw name="Create File" library="OperatingSystem">
+<arg>queryEthPortResponse.xml</arg>
+<arg>${xml_content}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.278" endtime="20241231 08:14:19.278"/>
+</kw>
+<kw name="Query Response Eth Port" library="ONT_linkSpeed">
+<var>${result}</var>
+<arg>${queryResponseFilePath}</arg>
+<status status="NOT RUN" starttime="20241231 08:14:19.278" endtime="20241231 08:14:19.279"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${resultType}</var>
+<arg>type($result)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.279" endtime="20241231 08:14:19.279"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${autoDetectConfig}</var>
+<arg>${result}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.279" endtime="20241231 08:14:19.279"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${autoDectLinkSpeed}</var>
+<arg>${result}[1]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.279" endtime="20241231 08:14:19.279"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\n*Auto Detected Configuration is: ${autoDectLinkSpeed}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.280" endtime="20241231 08:14:19.280"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${opstatConfigIndicator}</var>
+<arg>${result}[2]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.280" endtime="20241231 08:14:19.280"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${opstatLinkSpeed_pre}</var>
+<arg>${result}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.280" endtime="20241231 08:14:19.280"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\n*OpstatLinkSpeed_pre is: ${opstatLinkSpeed_pre}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.281" endtime="20241231 08:14:19.281"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ifOperStatus}</var>
+<arg>${result}[4]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.281" endtime="20241231 08:14:19.281"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${operStatus_pre}</var>
+<arg>${result}[5]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.281" endtime="20241231 08:14:19.281"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\n*Status is: ${operStatus_pre}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.281" endtime="20241231 08:14:19.281"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>\n*Before OLT reset ${resetLT_value} Operation Configure is: ${opstatConfigIndicator} : ${_opstatLinkSpeed_pre}</arg>
+<arg>console=True \n</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.281" endtime="20241231 08:14:19.281"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>\n*Before OLT reset ${resetLT_value} Operation status is: ${ifOperStatus} : ${operStatus_pre}</arg>
+<arg>console=True \n</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.281" endtime="20241231 08:14:19.281"/>
+</kw>
+<kw name="Append To File" library="OperatingSystem">
+<arg>${ONT_resetDataFile}</arg>
+<arg>******* Result test data for scenario Reset of OLT ${resetLT_value} : \n</arg>
+<doc>Appends the given content to the specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.282" endtime="20241231 08:14:19.282"/>
+</kw>
+<if>
+<branch type="IF" condition="'${_opstatLinkSpeed_pre}' == 'Not Detected' or '${operStatus_pre}' == 'Down'">
+<kw name="Append To File" library="OperatingSystem">
+<arg>${ONT_resetDataFile}</arg>
+<arg>Test stopped due to either current Operation State is Down or Configuaration Status is Not Detected \n</arg>
+<doc>Appends the given content to the specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.282" endtime="20241231 08:14:19.282"/>
+</kw>
+<status status="NOT RUN" starttime="20241231 08:14:19.282" endtime="20241231 08:14:19.282"/>
+</branch>
+<status status="NOT RUN" starttime="20241231 08:14:19.282" endtime="20241231 08:14:19.282"/>
+</if>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${operStatus_pre}</arg>
+<arg>Up</arg>
+<arg>Msg: Before Operation status shows as DOWN</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.283" endtime="20241231 08:14:19.283"/>
+</kw>
+<kw name="Should Not Be Equal As Strings" library="BuiltIn">
+<arg>${opstatLinkSpeed_pre}</arg>
+<arg>Not Detected</arg>
+<arg>Msg: Before Operation Link Speed</arg>
+<arg>shows as NOT DETECTED</arg>
+<doc>Fails if objects are equal after converting them to strings.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.283" endtime="20241231 08:14:19.283"/>
+</kw>
+<kw name="Append To File" library="OperatingSystem">
+<arg>${ONT_resetDataFile}</arg>
+<arg>Before OLT Reset ${resetLT_value} Operation Configuration Indicator : ${opstatLinkSpeed_pre}\n</arg>
+<doc>Appends the given content to the specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.283" endtime="20241231 08:14:19.283"/>
+</kw>
+<kw name="Append To File" library="OperatingSystem">
+<arg>${ONT_resetDataFile}</arg>
+<arg>Before OLT Reset ${resetLT_value} action Operation Status : ${operStatus_pre} \n</arg>
+<doc>Appends the given content to the specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.283" endtime="20241231 08:14:19.283"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>@{auth}</var>
+<arg>${soapUI_user}</arg>
+<arg>${passWord}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.284" endtime="20241231 08:14:19.284"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers_resetONT}</var>
+<arg>Content-Type=text/xml;charset=UTF-8</arg>
+<arg>SOAPAction=""</arg>
+<arg>Host=10.250.37.132:8080</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.284" endtime="20241231 08:14:19.284"/>
+</kw>
+<kw name="Get Binary File" library="OperatingSystem">
+<var>${resetOLTbody}</var>
+<arg>C:\\Users\\mkk933\\AppData\\Local\\Programs\\Python\\Python39\\autonegotscenarios-master${/}resetLT_SelfTest.xml</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.284" endtime="20241231 08:14:19.284"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mySession</arg>
+<arg>${base_url_autoNegot}</arg>
+<arg>auth=${auth}</arg>
+<arg>disable_warnings=1</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.284" endtime="20241231 08:14:19.284"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response_resetOLTbody}</var>
+<arg>mySession</arg>
+<arg>${endpoint_autoNegot}</arg>
+<arg>headers=${headers_resetONT}</arg>
+<arg>data=${resetOLTbody}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.284" endtime="20241231 08:14:19.284"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>15s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.284" endtime="20241231 08:14:19.285"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers_query}</var>
+<arg>Content-Type=text/xml;charset=UTF-8</arg>
+<arg>SOAPAction=""</arg>
+<arg>Host=10.250.37.132:8443</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.285" endtime="20241231 08:14:19.285"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>@{auth}</var>
+<arg>${soapUI_user}</arg>
+<arg>${passWord}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.285" endtime="20241231 08:14:19.285"/>
+</kw>
+<kw name="Get Binary File" library="OperatingSystem">
+<var>${queryEthPortBody}</var>
+<arg>C:\\Users\\mkk933\\AppData\\Local\\Programs\\Python\\Python39\\autonegotscenarios-master${/}queryEthPort.xml</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.285" endtime="20241231 08:14:19.285"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mySession</arg>
+<arg>${base_url_query}</arg>
+<arg>auth=${auth}</arg>
+<arg>disable_warnings=1</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.285" endtime="20241231 08:14:19.285"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response_queryEthPortBody}</var>
+<arg>mySession</arg>
+<arg>${endpoint_query}</arg>
+<arg>headers=${headers_query}</arg>
+<arg>data=${queryEthPortBody}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.286" endtime="20241231 08:14:19.286"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${xml_content}</var>
+<arg>${response_queryEthPortBody.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.286" endtime="20241231 08:14:19.286"/>
+</kw>
+<kw name="Create File" library="OperatingSystem">
+<arg>queryEthPortResponse.xml</arg>
+<arg>${xml_content}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.286" endtime="20241231 08:14:19.286"/>
+</kw>
+<kw name="Query Response Eth Port" library="ONT_linkSpeed">
+<var>${result}</var>
+<arg>${queryResponseFilePath}</arg>
+<status status="NOT RUN" starttime="20241231 08:14:19.286" endtime="20241231 08:14:19.287"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${resultType}</var>
+<arg>type($result)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.287" endtime="20241231 08:14:19.287"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ifOperStatus_reset}</var>
+<arg>${result}[4]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.287" endtime="20241231 08:14:19.287"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${operStatus_reset}</var>
+<arg>${result}[5]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.287" endtime="20241231 08:14:19.287"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>\n*During OLT reset ${result_action} action operation status is: ${ifOperStatus_reset} : ${operStatus_reset}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.287" endtime="20241231 08:14:19.287"/>
+</kw>
+<kw name="Append To File" library="OperatingSystem">
+<arg>${ONT_resetDataFile}</arg>
+<arg>During OLT reset ${resetLT_value} Operation Status : ${operStatus_reset} \n</arg>
+<doc>Appends the given content to the specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.287" endtime="20241231 08:14:19.287"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>Should Be Equal</arg>
+<arg>${operStatus_reset}</arg>
+<arg>Down</arg>
+<arg>Msg. Status should show Down during reset</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.288" endtime="20241231 08:14:19.288"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>300s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.288" endtime="20241231 08:14:19.288"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${counter}</var>
+<value>24</value>
+<iter>
+<var name="${counter}"/>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{headers_query}</var>
+<arg>Content-Type=text/xml;charset=UTF-8</arg>
+<arg>SOAPAction=""</arg>
+<arg>Host=10.250.37.132:8443</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.288" endtime="20241231 08:14:19.289"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>@{auth}</var>
+<arg>${soapUI_user}</arg>
+<arg>${passWord}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.289" endtime="20241231 08:14:19.289"/>
+</kw>
+<kw name="Get Binary File" library="OperatingSystem">
+<var>${queryEthPortBody}</var>
+<arg>C:\\Users\\mkk933\\AppData\\Local\\Programs\\Python\\Python39\\autonegotscenarios-master${/}queryEthPort.xml</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.289" endtime="20241231 08:14:19.289"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mySession</arg>
+<arg>${base_url_query}</arg>
+<arg>auth=${auth}</arg>
+<arg>disable_warnings=1</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.289" endtime="20241231 08:14:19.289"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response_queryEthPortBody}</var>
+<arg>mySession</arg>
+<arg>${endpoint_query}</arg>
+<arg>headers=${headers_query}</arg>
+<arg>data=${queryEthPortBody}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.289" endtime="20241231 08:14:19.290"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${xml_content}</var>
+<arg>${response_queryEthPortBody.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.290" endtime="20241231 08:14:19.290"/>
+</kw>
+<kw name="Create File" library="OperatingSystem">
+<arg>queryEthPortResponse.xml</arg>
+<arg>${xml_content}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.290" endtime="20241231 08:14:19.290"/>
+</kw>
+<kw name="Query Response Eth Port" library="ONT_linkSpeed">
+<var>${result}</var>
+<arg>${queryResponseFilePath}</arg>
+<status status="NOT RUN" starttime="20241231 08:14:19.290" endtime="20241231 08:14:19.290"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${resultType}</var>
+<arg>type($result)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.290" endtime="20241231 08:14:19.290"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${opstatConfigIndicator_post}</var>
+<arg>${result}[2]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.291" endtime="20241231 08:14:19.291"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${opstatLinkSpeed_post}</var>
+<arg>${result}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.291" endtime="20241231 08:14:19.291"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ifOperStatus_post}</var>
+<arg>${result}[4]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.291" endtime="20241231 08:14:19.291"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${operStatus_post}</var>
+<arg>${result}[5]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.291" endtime="20241231 08:14:19.291"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\n*Refresh status - ${operStatus_post}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.291" endtime="20241231 08:14:19.291"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${operStatus_post}' == 'Up'</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.291" endtime="20241231 08:14:19.293"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.293" endtime="20241231 08:14:19.293"/>
+</kw>
+<status status="NOT RUN" starttime="20241231 08:14:19.288" endtime="20241231 08:14:19.293"/>
+</iter>
+<status status="NOT RUN" starttime="20241231 08:14:19.288" endtime="20241231 08:14:19.293"/>
+</for>
+<kw name="Log" library="BuiltIn">
+<arg>\n*After OLT reset ${resetLT_value} Operation Configure is: ${opstatConfigIndicator_post} : ${opstatLinkSpeed_post}</arg>
+<arg>console=True</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.293" endtime="20241231 08:14:19.293"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>\n*After OLT reset ${resetLT_value} operation Status is: ${ifOperStatus_post} : ${operStatus_post}</arg>
+<arg>console=True \n</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.293" endtime="20241231 08:14:19.293"/>
+</kw>
+<if>
+<branch type="IF" condition="'${opstatLinkSpeed_pre}' == '${opstatLinkSpeed_post}' and '${operStatus_pre}' == '${operStatus_post}' and '${opstatLinkSpeed_post}' != 'Not detected' and '${operStatus_post}'!= 'Down'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_result}</var>
+<arg>PASS</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.293" endtime="20241231 08:14:19.293"/>
+</kw>
+<status status="NOT RUN" starttime="20241231 08:14:19.293" endtime="20241231 08:14:19.294"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Variable" library="BuiltIn">
+<var>${test_result}</var>
+<arg>FAIL</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.294" endtime="20241231 08:14:19.294"/>
+</kw>
+<status status="NOT RUN" starttime="20241231 08:14:19.294" endtime="20241231 08:14:19.294"/>
+</branch>
+<status status="NOT RUN" starttime="20241231 08:14:19.293" endtime="20241231 08:14:19.294"/>
+</if>
+<kw name="Append To File" library="OperatingSystem">
+<arg>${ONT_resetDataFile}</arg>
+<arg>After OLT reset ${resetLT_value} Operation Configuration Indicator : ${opstatLinkSpeed_post}\n</arg>
+<doc>Appends the given content to the specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.294" endtime="20241231 08:14:19.294"/>
+</kw>
+<kw name="Append To File" library="OperatingSystem">
+<arg>${ONT_resetDataFile}</arg>
+<arg>After OLT reset ${resetLT_value} Operation Status : ${operStatus_post} \n</arg>
+<doc>Appends the given content to the specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.294" endtime="20241231 08:14:19.294"/>
+</kw>
+<kw name="Append To File" library="OperatingSystem">
+<arg>${ONT_resetDataFile}</arg>
+<arg>Test result for OLT reset ${resetLT_value}: ${test_result}\n\n</arg>
+<doc>Appends the given content to the specified file.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.295" endtime="20241231 08:14:19.295"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>Should Be Equal</arg>
+<arg>${opstatLinkSpeed_pre}</arg>
+<arg>${opstatLinkSpeed_post}</arg>
+<arg>Msg. link speed config should be the same after reset</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.295" endtime="20241231 08:14:19.295"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>Should Be Equal</arg>
+<arg>${operStatus_pre}</arg>
+<arg>${operStatus_post}</arg>
+<arg>Msg. status should be Up after reset is completed</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<status status="NOT RUN" starttime="20241231 08:14:19.295" endtime="20241231 08:14:19.295"/>
+</kw>
+<status status="FAIL" starttime="20241231 08:14:19.261" endtime="20241231 08:14:19.295"/>
+</iter>
+<status status="FAIL" starttime="20241231 08:14:19.261" endtime="20241231 08:14:19.295"/>
+</for>
+<status status="FAIL" starttime="20241231 08:14:19.253" endtime="20241231 08:14:19.297">Variable '${passWord}' not found.</status>
+</test>
+<status status="FAIL" starttime="20241231 08:14:18.918" endtime="20241231 08:14:19.299"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="AutoNegotResetLT">AutoNegotResetLT</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20241231 08:14:19.249" level="ERROR">Error in file 'C:\Users\mkk933\AppData\Local\Programs\Python\Python39\autonegotscenarios-master\AutoNegotResetLT.robot' on line 21: Setting variable '${passWord}' failed: Environment variable '%{Phaque#145}' not found.</msg>
+</errors>
+</robot>
